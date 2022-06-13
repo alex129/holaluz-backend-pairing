@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Http\Controllers\CustomerReadingsController;
+use Exception;
 use Illuminate\Console\Command;
 
 class checkCustomerReadings extends Command
@@ -36,13 +37,20 @@ class checkCustomerReadings extends Command
      */
     public function handle()
     {
-        $this->customerReadingsController->readCustomerReadingsFile($this->argument('file_name'));
-        $headers = ['Name', 'Awesomeness Level'];
-        $data = [
-            ['Jim', 'Meh'],
-            ['Conchita', 'Fabulous']
-        ];
+        try{
+            $customerReadings = $this->customerReadingsController->readCustomerReadingsFile($this->argument('file_name'));
+        }catch(Exception $ex){
+            $this->error($ex->getMessage());
+        }
 
+
+        $headers = ['Client', 'Month', 'Suspicious', 'Median'];
+        $readingsAverage = $this->customerReadingsController->getReadingsAverage($customerReadings);
+        
+        $data = [];
+        foreach($customerReadings as $customerReading){
+            $data[] = [$customerReading->customerId, $customerReading->month, $customerReading->reading, $readingsAverage];
+        }
 
         $this->table($headers, $data);
     }

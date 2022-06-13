@@ -3,7 +3,8 @@
 namespace App\Models;
 
 class CustomerReading{
-    protected $customerId;
-    protected $period;
-    protected $reading;
+    public $customerId;
+    public $period;
+    public $reading;
+    public $month;
 }
