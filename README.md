@@ -26,7 +26,7 @@ Command
 
 ## Code 
 
-The main class of the project is in located in app/Console/Commands/checkCustomerReadings.php
+The main class of the project is located in app/Console/Commands/checkCustomerReadings.php
 
 Te function handle will execute the logic of the `read:readings {file_name}` command.
 
