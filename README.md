@@ -23,7 +23,7 @@ The XML and CSV files must to be located in storage/files
 
 Command
 
-`sail artisan read:readings filename.xml`
+`sail artisan read:readings 2016-readings.xml`
 
 ## Code 
 
