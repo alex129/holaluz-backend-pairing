@@ -24,13 +24,13 @@ Command
 
 `sail artisan read:readings filename.xml`
 
-##Code 
+## Code 
 
 The main class of the project is in located in app/Console/Commands/checkCustomerReadings.php
 
 Te function handle will execute the logic of the `read:readings {file_name}` command.
 
-##Testing
+## Testing
 Tests are located in test folder.
 
 Execute testing
