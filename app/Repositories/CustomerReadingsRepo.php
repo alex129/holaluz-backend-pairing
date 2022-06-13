@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\CustomerReading;
 use Carbon\Carbon;
 use DOMDocument;
+use Exception;
 use Ramsey\Uuid\Type\Decimal;
 use XMLReader;
 
