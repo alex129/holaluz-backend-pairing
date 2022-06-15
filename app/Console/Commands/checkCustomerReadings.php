@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Helpers\SuspiciousReadingsHelper;
 use App\Http\Controllers\CustomerReadingsController;
 use Exception;
 use Illuminate\Console\Command;
@@ -40,8 +41,11 @@ class checkCustomerReadings extends Command
         try {
             $customerReadings = $this->customerReadingsController->readCustomerReadingsFile($this->argument('file_name'));
 
+            //Call helper to sort array with suspicious readings
+            SuspiciousReadingsHelper::sortSuspiciousReadings($customerReadings);
+
             $headers = ['Client', 'Month', 'Suspicious', 'Median'];
-            $readingsAverage = $this->customerReadingsController->getReadingsAverage($customerReadings);
+            $readingsAverage = SuspiciousReadingsHelper::getReadingsAverage($customerReadings);
 
             $data = [];
             foreach ($customerReadings as $customerReading) {

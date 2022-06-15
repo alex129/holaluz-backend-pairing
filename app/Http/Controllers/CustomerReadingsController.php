@@ -30,9 +30,4 @@ class CustomerReadingsController extends Controller
 
         throw new Exception("File extension not suported");
     }
-
-    public function getReadingsAverage($customerReadings)
-    {
-        return $this->customerReadingsRepo->getReadingsAverage($customerReadings);
-    }
 }

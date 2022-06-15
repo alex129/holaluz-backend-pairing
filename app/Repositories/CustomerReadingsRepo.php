@@ -11,6 +11,10 @@ use XMLReader;
 
 class CustomerReadingsRepo implements CustomerReadings
 {
+    /**
+     * @param String $fileName
+     * @return CustomerReading[]
+     */
     public function getDataFromXML($fileName): iterable
     {
         $xmlObject = simplexml_load_file(storage_path() . "/files/{$fileName}");
@@ -24,11 +28,13 @@ class CustomerReadingsRepo implements CustomerReadings
             $data[] = $customerReading;
         }
 
-        $this->sortSuspiciousReadings($data);
-
         return $data;
     }
 
+    /**
+     * @param String $fileName
+     * @return CustomerReading[]
+     */
     public function getDataFromCSV($fileName): iterable
     {
         $customerReadings = [];
@@ -53,8 +59,6 @@ class CustomerReadingsRepo implements CustomerReadings
             }
         }
 
-        $this->sortSuspiciousReadings($data);
-
         return $data;
     }
 
@@ -71,29 +75,5 @@ class CustomerReadingsRepo implements CustomerReadings
     public function getDataFromFTP($connection, $fileName): iterable
     {
         return [];
-    }
-
-    public function getReadingsAverage($customerReadings): int
-    {
-        $readingAverage = 0;
-        foreach ($customerReadings as $customerReading) {
-            $readingAverage += $customerReading->reading;
-        }
-        $readingAverage = $readingAverage / count($customerReadings);
-
-        return $readingAverage;
-    }
-
-    private function sortSuspiciousReadings(&$customerReadings)
-    {
-        $readingAverage = $this->getReadingsAverage($customerReadings);
-        $customerReadings = array_filter($customerReadings, function ($customerReading) use ($readingAverage) {
-            return ($customerReading->reading > ($readingAverage * 1.5)) || ($customerReading->reading < ($readingAverage / 1.5)); //+- 50%
-        });
-
-        //SORT ASC BY MONTH
-        usort($customerReadings, function ($a, $b) {
-            return  $a->month > $b->month;
-        });
     }
 }

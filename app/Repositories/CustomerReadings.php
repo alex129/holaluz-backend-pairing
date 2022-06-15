@@ -25,8 +25,4 @@ interface CustomerReadings{
      * @return CustomerReading[]
      */
     public function getDataFromFTP($connection, $fileName): Iterable;
-    /**
-     * @return Int
-     */
-    public function getReadingsAverage($customerReadings): Int;
 }
