@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Helpers\SuspiciousReadingsHelper;
-use App\Http\Controllers\CustomerReadingsController;
+use App\Http\Controllers\ReadCustomerReadingsFileController;
 use Exception;
 use Illuminate\Console\Command;
 
@@ -23,12 +23,12 @@ class checkCustomerReadings extends Command
      */
     protected $description = 'Customer suspicious readings';
 
-    protected $customerReadingsController;
+    protected $readCustomerReadingsFile;
 
-    public function __construct(CustomerReadingsController $customerReadingsController)
+    public function __construct(ReadCustomerReadingsFileController $readCustomerReadingsFile)
     {
         parent::__construct();
-        $this->customerReadingsController = $customerReadingsController;
+        $this->readCustomerReadingsFile = $readCustomerReadingsFile;
     }
 
     /**
@@ -39,7 +39,7 @@ class checkCustomerReadings extends Command
     public function handle()
     {
         try {
-            $customerReadings = $this->customerReadingsController->readCustomerReadingsFile($this->argument('file_name'));
+            $customerReadings = $this->readCustomerReadingsFile->__invoke($this->argument('file_name'));
 
             //Call helper to sort array with suspicious readings
             SuspiciousReadingsHelper::sortSuspiciousReadings($customerReadings);

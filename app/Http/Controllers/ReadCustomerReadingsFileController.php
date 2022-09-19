@@ -7,7 +7,7 @@ use App\Repositories\CustomerReadingsRepo;
 use Exception;
 use Illuminate\Http\Request;
 
-class CustomerReadingsController extends Controller
+class ReadCustomerReadingsFileController
 {
     protected $customerReadingsRepo;
 
@@ -16,11 +16,10 @@ class CustomerReadingsController extends Controller
         $this->customerReadingsRepo = $customerReadingsRepo;
     }
 
-    public function readCustomerReadingsFile($fileName)
+    public function __invoke($fileName)
     {
         $fileExtension = pathinfo(public_path($fileName), PATHINFO_EXTENSION);
 
-        $data = null;
         switch (strtoupper($fileExtension)) {
             case FileTypes::XML->name:
                 return $this->customerReadingsRepo->getDataFromXML($fileName);

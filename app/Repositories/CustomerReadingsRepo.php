@@ -9,7 +9,7 @@ use Exception;
 use Ramsey\Uuid\Type\Decimal;
 use XMLReader;
 
-class CustomerReadingsRepo implements CustomerReadings
+class CustomerReadingsRepo
 {
     /**
      * @param String $fileName

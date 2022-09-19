@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Unit;
 
-use App\Http\Controllers\CustomerReadingsController;
+use App\Http\Controllers\ReadCustomerReadingsFileController;
 use App\Repositories\CustomerReadingsRepo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -22,8 +22,8 @@ class CustomerReadingsControllerTest extends TestCase
         $mock = $this->mock(CustomerReadingsRepo::class, function (MockInterface $mock) {
             $mock->shouldReceive('getDataFromXML')->once();
         });
-        $controller = new CustomerReadingsController($mock);
-        $controller->readCustomerReadingsFile("file.xml");
+        $controller = new ReadCustomerReadingsFileController($mock);
+        $controller("file.xml");
     }
 
     public function test_read_customer_readings_file_csv()
@@ -31,7 +31,7 @@ class CustomerReadingsControllerTest extends TestCase
         $mock = $this->mock(CustomerReadingsRepo::class, function (MockInterface $mock) {
             $mock->shouldReceive('getDataFromCSV')->once();
         });
-        $controller = new CustomerReadingsController($mock);
-        $controller->readCustomerReadingsFile("file.csv");
+        $controller = new ReadCustomerReadingsFileController($mock);
+        $controller("file.csv");
     }
 }
