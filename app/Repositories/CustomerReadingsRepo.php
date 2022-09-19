@@ -15,7 +15,7 @@ class CustomerReadingsRepo
      * @param String $fileName
      * @return CustomerReading[]
      */
-    public function getDataFromXML($fileName): iterable
+    public function getDataFromXML($fileName): array
     {
         $xmlObject = simplexml_load_file(storage_path() . "/files/{$fileName}");
         // dd((string)$xmlObject->reading[2]["clientID"]);
@@ -35,7 +35,7 @@ class CustomerReadingsRepo
      * @param String $fileName
      * @return CustomerReading[]
      */
-    public function getDataFromCSV($fileName): iterable
+    public function getDataFromCSV($fileName): array
     {
         $customerReadings = [];
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Src\BoundedContext\Shared\Infrastructure\Console\Commands;
 
 use App\Helpers\SuspiciousReadingsHelper;
-use App\Http\Controllers\ReadCustomerReadingsFileController;
 use Exception;
 use Illuminate\Console\Command;
+use Src\BoundedContext\CustomerReadings\Infrastructure\Controllers\ReadCustomerReadingsFileController;
 
 class checkCustomerReadings extends Command
 {

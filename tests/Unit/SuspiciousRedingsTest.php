@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Integration;
+namespace Tests\Unit;
 
 use App\Helpers\SuspiciousReadingsHelper;
 use App\Models\CustomerReading;
